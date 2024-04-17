@@ -1,0 +1,28 @@
+LDAP_URL: ldap://metaldap.eroski.es:389
+LDAP_BASE: o=eroskiusers
+
+POSTGRESQL_URL: jdbc:postgresql://172.30.142.64:5432/hermes
+POSTGRESQL_USERNAME: hermesadm
+POSTGRESQL_PASSWORD: wHkPo3F@1GtvDEl
+
+APPPRETEST: HPESCA_HPESCA
+
+ADMIN_USER_CREDENTIALS: 12345678
+JWT_SECRET: dfq0ny8u0iwmz8bxzn4u9cnq21sgmheo570hpsqv3v6wn448m1k2b24ekyoageajrh2msda1mgjmnplffu1nhz6spox0kel9mxnpm2kp9y8lr3lbsngh22z4beqiu8bn47mx3o33yz9drfde7ou9l4tqj1rakfp4a9ay1rhygxibxhetqm0l8dl8s2njco09ltnc77hr
+CORS_ALLOWED_ORIGINS: http://localhost:4200,http://localhost:8080
+
+S3_URL: https://s3.eroski.es:8082
+S3_KEY: 291IN2Q5GSOITEZY59HR
+S3_SECRET: 31UdNNM94+jv2NYUj2IH6hCpZ+9U9Jy0CXD0c3XT
+S3_BUCKET: hermesdes
+
+STRATIO_USER_USERNAME: stratio
+STRATIO_USER_PASSWORD: stratio_password
+STRATIO_USER_EMAIL: stratio@eroski.es
+STRATIO_USER_NAME: Stratio
+STRATIO_ROLE_CODE: stratio
+STRATIO_ROLE_NAME: Stratio role
+STRATIO_ROLE_DESCRIPTION: Rol para clientes de Stratio que leen la finalización de la ejecución
+STRATIO_PERMISSION_CODE: stratio_read
+STRATIO_PERMISSION_NAME: Lectura del fin de ejecución
+STRATIO_PERMISSION_DESCRIPTION: Permite a clientes de Stratio leer el fina de la ejecución

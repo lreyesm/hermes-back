@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Setting those properties is mandatory for proper logging (used on default logging patterns) -->
+    <property name="APP_NAME" value="hermes" />
+
+    <!-- Log files path used in eroski-logback-starter-config-rolling_file_appender -->
+    <property name="LOG_PATH" value="/home/hermes/log/"/>
+
+
+    <include resource="eroski-logback-starter-config-general_configuration.xml"/>
+
+    <!-- If you remove this conversion rule to stop escaping html, remember to override CONSOLE_LOG_PATTERN and FILE_ROLLING_LOG_PATTERN to remove %htmlEscape -->
+    <conversionRule conversionWord="htmlEscape" converterClass="es.eroski.oinarri.starter.logback.starter.messageconverter.EroskiEscapeHTMLMessageConverter"/>
+
+
+    <!--
+        Each spring profile can have its own appenders.
+        To see all available appenders read Eroski's logback-starter README.md or check its src/resources folder, where those appenders are defined.
+     -->
+    <springProfile name="test">
+        <include resource="eroski-logback-starter-config-console_appender.xml"/>
+    </springProfile>
+
+    <!--Log patterns/configurations can be overridden uncommenting any of the following properties:
+
+        <property name="CONSOLE_LOG_PATTERN" value="new pattern here"/>
+        <property name="FILE_ROLLING_LOG_PATTERN" value="new pattern here"/>
+        <property name="LOG_FILE_NAME" value ="new logfile name" />
+
+     Remember to keep them below the <include>'s to overwrite them. -->
+
+
+</configuration>
+

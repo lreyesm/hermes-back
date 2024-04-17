@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>es.eroski.oinarri</groupId>
+		<artifactId>springboot-parent-pom</artifactId>
+		<version>0.2.0</version>
+	</parent>
+
+	<groupId>es.eroski</groupId>
+	<artifactId>phermes-back</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>phermes-back</name>
+	<description>Oinarri APP</description>
+
+	<organization>
+		<name>Eroski</name>
+		<url>https://eroski.es</url>
+	</organization>
+
+	<dependencies>
+		
+		<dependency>
+			<groupId>es.eroski.oinarri</groupId>
+			<artifactId>core-lib</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>es.eroski.oinarri</groupId>
+			<artifactId>spring-security-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>es.eroski.oinarri</groupId>
+			<artifactId>logback-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>es.eroski.oinarri</groupId>
+			<artifactId>spring-boot-admin-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>es.eroski.oinarri</groupId>
+			<artifactId>postgresql-starter</artifactId>
+		</dependency>
+
+		<!-- spring-data-starter is not required explicitly since it is already included in h2-starter and mysql-started. Added to show visually that we are handling jpa/hibernate from out starter -->
+		<dependency>
+			<groupId>es.eroski.oinarri</groupId>
+			<artifactId>spring-data-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>es.eroski.oinarri</groupId>
+			<artifactId>ldap-login-lib</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>es.eroski.oinarri</groupId>
+			<artifactId>h2-starter</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>es.eroski.oinarri</groupId>
+			<artifactId>swagger-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>es.eroski.oinarri</groupId>
+			<artifactId>junit-starter</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.xml.ws</groupId>
+			<artifactId>jakarta.xml.ws-api</artifactId>
+			<version>4.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>4.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<version>2.5.0</version>
+		</dependency>
+
+
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+
+
+			<!-- inetum -->
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>4.0.3</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${project.basedir}/src/main/resources/encolar.wsdl</wsdl>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<source>17</source> <!-- depending on your project -->
+					<target>17</target> <!-- depending on your project -->
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.5.5.Final</version>
+						</path>
+
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>0.2.0</version>
+						</path>
+						<!-- other annotation processors -->
+					</annotationProcessorPaths>
+
+					<compilerArgs>
+						<compilerArg>
+							-Amapstruct.defaultComponentModel=spring
+						</compilerArg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+
+
+		</plugins>
+	</build>
+
+
+</project>

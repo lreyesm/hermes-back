@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="LpuApi" targetNamespace="http://www.eroski.es/CAAI/wsdl/LpuApiServiceV1" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:ns="http://www.eroski.es/CAAI/schema/LpuApi" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.eroski.es/CAAI/wsdl/LpuApiServiceV1" xmlns:ns0="http://eroski/pycg/lpu/ws/Encolar.wsdl/types/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mysp="http://sun.com/ws/httpbc/security/BasicauthSecurityPolicy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+  <types>
+    <xsd:schema targetNamespace="http://www.eroski.es/CAAI/wsdl/LpuApiServiceV1">
+            <xsd:import namespace="http://www.eroski.es/CAAI/schema/LpuApi" schemaLocation="http://gersoa1.eroski.es:39080/LpuApiCompositeApp-sun-http-binding/LpuiApiBpelModule/XSD/LpuNormalizadoSchema.xsd"/>
+        </xsd:schema>
+  </types>
+  <message name="EncolarResponse">
+    <part name="part1" element="ns:LpuEncolarResponse">
+    </part>
+  </message>
+  <message name="EncolarRequest">
+    <part name="part1" element="ns:LpuEncolarRequest">
+    </part>
+  </message>
+  <portType name="LpuApiPortType">
+    <operation name="Encolar">
+      <input name="input1" message="tns:EncolarRequest">
+    </input>
+      <output name="output1" message="tns:EncolarResponse">
+    </output>
+    </operation>
+  </portType>
+  <binding name="LpuApiBinding" type="tns:LpuApiPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="Encolar">
+      <soap:operation/>
+      <input name="input1">
+        <soap:body use="literal"/>
+      </input>
+      <output name="output1">
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="LpuApiService">
+    <port name="LpuApiPort" binding="tns:LpuApiBinding">
+      <soap:address location="http://gersoa1.eroski.es:39080/LpuApiService/LpuApiPort/2013/03"/>
+    <wsp:PolicyReference URI="#HttpBasicAuthBindingBindingPolicy"/>
+    </port>
+  </service>
+    <wsp:Policy wsu:Id="HttpBasicAuthBindingBindingPolicy"><mysp:MustSupportBasicAuthentication on="true"><mysp:BasicAuthenticationDetail><mysp:Realm realmName="file"/></mysp:BasicAuthenticationDetail></mysp:MustSupportBasicAuthentication></wsp:Policy>
+</definitions>

@@ -1,0 +1,87 @@
+server:
+  port: 8080
+
+####
+eroski:
+  stratio:
+    url: http://localhost:8090/location/project/1
+    user: 
+      username: ${STRATIO_USER_USERNAME}
+      password: ${STRATIO_USER_PASSWORD}
+      email: ${STRATIO_USER_EMAIL}
+      name: ${STRATIO_USER_NAME}
+    role: 
+      code: ${STRATIO_ROLE_CODE}
+      name: ${STRATIO_ROLE_NAME}
+      description: ${STRATIO_ROLE_DESCRIPTION}
+    permission: 
+      code: ${STRATIO_PERMISSION_CODE}
+      name: ${STRATIO_PERMISSION_NAME}
+      description: ${STRATIO_PERMISSION_DESCRIPTION}
+
+  starter:
+    spring-security:
+      cors:
+        allowed_origins: ${CORS_ALLOWED_ORIGINS}
+      oinarri_security_filter_chain:
+        frame_options: disable
+        hsts:
+          enabled: false
+    logback:
+      hashed_rolling_file_salt: default_salt #Salt used to hash logs using EROSKI-LOGBACK-STARTER-HASHED-FILE-ROLLING. Remember to set it properly
+    spring-ldap:
+      enable_default_configuration: true
+      url: ${LDAP_URL}
+      base: ${LDAP_BASE}
+      
+    spring-data:
+       datasource:
+        oinarri:
+          enabled: true
+          username: ${POSTGRESQL_USERNAME}
+          password: ${POSTGRESQL_PASSWORD}
+          url: ${POSTGRESQL_URL}
+          driverClassName: org.postgresql.Driver
+          additional_packages: es.eroski.phermesback.model
+          hibernate:
+            hbm2ddl:
+              auto: none
+
+  library:
+    ldap-login:
+      ldap:
+        attributesearch: groupMembership
+        apppretext: ${APPPRETEST}
+      user:
+        admin:
+          credentials: ${ADMIN_USER_CREDENTIALS}
+      authentication_provider: ldap #Default authentication provider. To see available choices see es.eroski.ldaplogin.constant.LDAPLoginConstants.AuthenticationProviders (ldap-login library)
+      default_login_endpoint: /login #ldap-login login endpoint
+      default_logout_endpoint: /logout #ldap-login logout endpoint
+      default_refresh_jwt_token_endpoint: /refresh-jwt-token #ldap-login refresh jwt token endpoint
+      jwt:
+        secret: ${JWT_SECRET}
+        duration_minutes: 30
+        cookie_name: PHERMES_JWT_AUTH_COOKIE
+        refresh_cookie_name: PHERMES_JWT_REFRESH_COOKIE
+        refresh_token_duration_minutes: 1440
+
+spring:
+  docker:
+    compose:
+      enabled: false
+#  profiles:
+#    active: local #By default, the application will start using "local" profile. Set the proper environmental variable/command line parameter/property to use other profile.
+  jpa:
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate.default_schema: shermes
+
+
+netapp:
+  url: ${S3_URL}
+  key: ${S3_KEY}
+  secret: ${S3_SECRET}
+  bucket: ${S3_BUCKET}
+
